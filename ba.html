@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>证券/资金账户管理</title>
+<link rel="stylesheet" href="style/index.css"></link>
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.css"></head>
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap-theme.css"  />
+<script type="text/javascript" src="js/jQuery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.4-dist/js/npm.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="tabbable" id="tabs-292195">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a data-toggle="tab" href="#panel-323409">账户办理</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#panel-232862">账户挂失</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#panel-232863">账户补办</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#panel-232864">账户冻结</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#panel-232865">销户</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#panel-232866">密码修改</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-323409">
+						<form action="ba_open.php" method="post">
+       					 <p>
+                         姓名
+        				<input name="p_name" type="text" size="40"/>
+        </p>
+        <p>
+        				身份证号
+        				<input name="person_id" type="text" size="40"/>
+                        </p>
+                        <p>
+                        性别
+                        <input name="sex" type="text" size="40"/>
+                        </p>
+                        <P>
+                        联系电话
+                        <input name="p_tele" type="text" size="40"/>
+                        </P>
+                        <p>
+                        家庭住址
+                        <input name="p_add" type="text" size="40"/>
+                        </p>
+                        <p>
+                        学历
+                        <input name="p_academic" type="text" size="40"/>
+                        </p>
+                        <P>
+                        工作单位
+                        <input name="p_workplace" type="text" size="40"/>
+                        </P>
+                        <p>
+                        办理日期
+                        <input name="p_date" type="text" size="40"/>
+                        </p>
+                        <p>
+
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+    					</form>
+					</div>
+					<div class="tab-pane" id="panel-232862">
+						<form action="ba_loss.php" method="post">
+       					 <p>
+                         姓名
+        				<input name="p_name" type="text" size="40"/>
+        				</p>
+        				<p>
+        				身份证号
+        				<input name="person_id" type="text" size="40"/>
+                        </p>
+                        <p>
+                        证券账户ID
+                        <input name="bond_account_id" type="text" size="40"/>
+                        </p>
+                        <p>
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+						</form>
+					</div>
+					<div class="tab-pane" id="panel-232863">
+						<form action="ba_frozen.php" method="post">
+                        <p>
+                        证券账户ID
+                        <input name="bond_account_id" type="text" size="40"/>
+                        </p>
+                        <p>
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+						</form>					
+                        </div>
+					<div class="tab-pane" id="panel-232864">
+						<form action="ba_frozen.php" method="post">
+       					 <p>
+                         姓名
+        				<input name="p_name" type="text" size="40"/>
+        				</p>
+        				<p>
+        				身份证号
+        				<input name="person_id" type="text" size="40"/>
+                        </p>
+                        <p>
+                        证券账户ID
+                        <input name="bond_account_id" type="text" size="40"/>
+                        </p>
+                        <p>
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+						</form>
+					</div>
+					<div class="tab-pane" id="panel-232865">
+						<form action="ba_delete.php" method="post">
+       					 <p>
+                         姓名
+        				<input name="p_name" type="text" size="40"/>
+        				</p>
+        				<p>
+        				身份证号
+        				<input name="person_id" type="text" size="40"/>
+                        </p>
+                        <p>
+                        证券账户ID
+                        <input name="bond_account_id" type="text" size="40"/>
+                        </p>
+                        <p>
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+						</form>
+					</div>
+					<div class="tab-pane" id="panel-232866">
+						<form action="ba_delete.php" method="post">
+       					 <p>
+                         证券账户ID
+        				<input name="p_name" type="text" size="40"/>
+        				</p>
+        				<p>
+        				原始密码
+        				<input name="person_id" type="password" size="40"/>
+                        </p>
+                        <p>
+                        新密码
+                        <input name="bond_account_id" type="password" size="40"/>
+                        </p>
+                        <p>
+                        再次输入新密码
+                        <input name="bond_account_id" type="password" size="40"/>
+                        </p>
+                        <p>
+        				<input type="submit" name="submit" value="提交"/>
+                        </p>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div id="__zsc_once">
+			</div>
+			<div id="__if72ru4sdfsdfrkjahiuyi_once">
+			</div>
+			<div id="__hggasdgjhsagd_once">
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
