@@ -9,7 +9,7 @@
 <?php
 	$url = "127.0.0.1";
 	$user = "root";
-	$password = "Ilovezmf1314!";
+	$pwd = "Ilovezmf1314!";
 	$db = "stock_account";
 ?>
 </body>

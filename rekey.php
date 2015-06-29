@@ -1,4 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+session_start();
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,6 +21,7 @@
 
 <body>
 <?php
+	include 'config.php';
 	$password1 = $_POST['password'];
 	$password2 = $_POST['repassword'];
 	
@@ -35,7 +39,7 @@
 		exit();
 	}
 	
-	$con = new mysqli("127.0.0.1","root","Ilovezmf1314!","stock_account");
+	$con = new mysqli($url,$user,$pwd,$db);
 	if (mysqli_connect_error())
 	{
 		printf("Connect failed: %s\n", mysqli_connect_error());

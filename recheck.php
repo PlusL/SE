@@ -19,7 +19,7 @@
 
 <body>
 <?php
-	
+		include 'config.php';
 	$type = $_POST['type'];
 	$person_id = $_POST['personid'];
 	$method = $_POST['method'];
@@ -30,7 +30,7 @@
 		exit();
 	}
 	
-	$con = new mysqli("127.0.0.1","root","Ilovezmf1314!","stock_account");
+	$con = new mysqli($url,$user,$pwd,$db);
 	if (mysqli_connect_error())
 	{
 		printf("Connect failed: %s\n", mysqli_connect_error());

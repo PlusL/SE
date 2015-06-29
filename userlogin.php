@@ -1,4 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+session_start();
+$_SESSION['user']=$_POST['admin_id'];
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,6 +22,7 @@
 
 <body>
 <?php
+	include 'config.php';
   $man_id=$_POST['admin_id'];
   $man_password=$_POST['inputPassword'];
   if (!$man_id || !$man_password ) {
@@ -30,7 +35,7 @@
         $man_id=addslashes($man_id);
         $man_password=addslashes($man_password);
     }
- $con = new mysqli("127.0.0.1","root","Ilovezmf1314!","stock_account");
+ $con = new mysqli($url,$user,$pwd,$db);
 if (mysqli_connect_error())
 {
 printf("Connect failed: %s\n", mysqli_connect_error());
@@ -44,6 +49,7 @@ else
   {
     if ($newArray = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
       if ($man_password == $newArray['cappasswd']) {
+
        echo "<p><center>登陆成功<center><br /></p>";
 	   header("refresh:1;url=user_func.html");
 	   exit();
