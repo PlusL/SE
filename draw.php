@@ -51,7 +51,7 @@ session_start();
 		}
 		else
 		{
-			if($num1 >= $newArray['usablecap'])
+			if($num1 <= $newArray['usablecap'])
 			{
 			$rest = $newArray['usablecap'] -$num1;
 			$sql1 = "update account set usablecap = usablecap - '".$num1."' where account_id = '".$_SESSION['user']."'";

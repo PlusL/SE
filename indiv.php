@@ -19,25 +19,25 @@
 <body>
 <?php
 	include 'config.php';
-	$person_id = $_POST['$personid'];
-	$name = $_POST['$name'];
-	$sex = $_POST['$sex'];
-	$tele = $_POST['$tele'];
-	$academic = $_POST['$academic'];
-	$address = $_POST['$address'];
-	$company = $_POST['$company'];
-	$career = $_POST['$career'];
-	$delname = $_POST['$delname'];
-	$delid = $_POST['$delid'];
-	$isdel = $_POST['$isdel'];
+	$person_id = $_POST['personid'];
+	$name = $_POST['name'];
+	$sex = $_POST['sex'];
+	$tele = $_POST['tele'];
+	$academic = $_POST['academic'];
+	$address = $_POST['address'];
+	$company = $_POST['company'];
+	$career = $_POST['career'];
+	$delname = $_POST['delname'];
+	$delid = $_POST['delid'];
+	$isdel = $_POST['isdel'];
 	
-	if(!$person_id || !$name || !$sex || !$tele ||!$academic ||!$address || !$company || !$career)
+	if(!$person_id || !$name || empty($sex) || empty($tele) ||empty($academic) ||!$address || !$company || empty($career))
 	{
 		echo"<p><center>输入存在遗漏，请重新录入</center></p>";
 		header("refresh:1;url=indivaccount.html");
 		exit();
 	}
-	if($isdel)
+	if(!empty($isdel))
 	{
 		if(!$delid || !$delname)
 		{
@@ -56,30 +56,30 @@
 	
 	else
 	{
-		$sql="select top 1 * from security_user order by id desc";
+		$sql="select * from security_user order by id desc limit 0,1";
 		$res=mysqli_query($con,$sql);
 		if($res == True)
 		{
 			$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
-			$aid = intval($newArray['id']);
+			$aid = (int)$newArray['id'];
 			$aid = $aid + 1;
-			$a_id = strval($aid);
+			$a_id =(string)$aid;
 		}
-		
-		$sql1="insert into individual_security_user values ('".$a_id."','".$person_id."','".$address."','".$company."','".$name."','".$sex."','".$tele."','".$career."','".$delname."','".$delid."')";
-		$res1=mysqli_query($con,$sql1);
 		
 		$sql2="insert into security_user values('".$a_id."','".$person_id."','".$name."','1','0')";
 		$res2=mysqli_query($con,$sql2);
 		
+		$sql1="insert into Individual_security_user values ('".$a_id."','".$person_id."','".$address."','".$company."','".$name."','".$sex."','".$tele."','".$career."','".$academic."','".$delname."','".$delid."')";
+		$res1=mysqli_query($con,$sql1);
+		
 		$sql3="insert into connect values('".$person_id."',NULL,NULL)";
 		$res3=mysqli_query($con,$sql3);
 		
-		$sql4="update connect set secid = '".$a_id."' where id = '".$person_id."'";
+		$sql4="update connect set id = '".$a_id."' where identity = '".$person_id."'";
 		$res4=mysqli_query($con,$sql4);
 
-		if($res1 == True &&$res2 == True && $res3 == True && $res4 == True)
-    	{
+		if($res1&&$res2&&$res3&&$res4)
+        {
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的证券账户账号为：</p>";
 			 echo $a_id;
@@ -89,6 +89,7 @@
 			 echo "</p>";
 			 echo "<a href='ad_function.html'><button class='btn-large'>返回</button></a>";
     	}
+    	
     	else
     	{
     		echo "<p><center>添加失败，请重试<center></p>";

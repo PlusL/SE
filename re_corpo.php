@@ -20,10 +20,10 @@
 <?php
 	include 'config.php';
 	$name = $_POST['name'];
-	$person_id = $_POST['$personid'];
-	$companyid = $_POST['$companyid'];
-	$businessid = $_POST['$businessid'];
-	$tele = $_POST['$tele'];
+	$person_id = $_POST['personid'];
+	$companyid = $_POST['companyid'];
+	$businessid = $_POST['businessid'];
+	$tele = $_POST['tele'];
 	$address = $_POST['$address'];
 	$auid = $_POST['auid'];
 	$autele = $_POST['autele'];
@@ -46,7 +46,7 @@
 	
 	else
 	{
-		$sql="select top 1 * from security_user order by id desc";
+		$sql="select * from security_user order by id desc limit 0,1";
 		$res=mysqli_query($con,$sql);
 		if($res == True)
 		{
@@ -55,13 +55,15 @@
 			$aid = $aid + 1;
 			$a_id = strval($aid);
 		}
-		$sql1="insert into company_security_user values ('".$a_id."','".$person_id."','".$companyid."','".$businessid."','".$address."','".$tele."','".$name."','".$auid."','".$autele."','".$auaddress."')";
-		$res1=mysqli_query($con,$sql1);
+		
 		
 		$sql2="insert into security_user values('".$a_id."','".$person_id."','".$companyid."','1','1')";
 		$res2=mysqli_query($con,$sql2);
 		
-		$sql3 = "update connect set secid = '".$a_id."' where id = '".$person_id."'";
+		$sql1="insert into company_security_user values ('".$a_id."','".$person_id."','".$companyid."','".$businessid."','".$address."','".$tele."','".$name."','".$auid."','".$autele."','".$auaddress."')";
+		$res1=mysqli_query($con,$sql1);
+		
+		$sql3 = "update connect set id = '".$a_id."' where identity = '".$person_id."'";
 		$res3 = mysqli_query($con,$sql3);
 		
 		$sql4 = "select id from security_user where identity = '".$person_id."' and id <> '".$a_id."'";
@@ -77,7 +79,7 @@
 		$sql7 = "delete from company_security_user where id = '".$exid."'";
 		$res7 = mysqli_query($con,$sql7);
 
-		if($res1 == True &&$res2 == True&&$res3 == True&&$res4 == True&&$res5 == True&&$res6 == True&&$res7 == True)
+		if($res1&&$res2&&$res3&&$res4&&$res5&&$res6&&$res7)
 		
     	{
     		 echo "<p><center>办理成功<center></p>";

@@ -7,10 +7,10 @@
 
 <body>
 <?php
-	$url = "127.0.0.1";
-	$user = "root";
-	$pwd = "Ilovezmf1314!";
-	$db = "stock_account";
+	$url = "115.28.244.252";
+	$user = "xzh";
+	$pwd = "q1w2e3r4";
+	$db = "xzh";
 ?>
 </body>
 </html>

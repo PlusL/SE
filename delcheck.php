@@ -19,15 +19,16 @@
 <body>
 <?php
 	include 'config.php';
-	$account_id = $_POST['account'];
+	$account_id = $_POST['accountid'];
 	$person_id = $_POST['personid'];
 	$type = $_POST['type'];
 	if(!$account_id||!$person_id)
 	{
 		
-	}echo"<p><center>未检测到输入，请重试</center></p>";
+	    echo"<p><center>未检测到输入，请重试</center></p>";
 		header("refresh:1;url=del_check.html");
 		exit();
+    }
 	
 	$con = new mysqli($url,$user,$pwd,$db);
 	if (mysqli_connect_error())
@@ -38,10 +39,10 @@
 	
 	switch ($type) 
 		 {
-    	case '1':
+    	case 'a':
     		del_sec();
     		break;
-    	case '2':
+    	case 'b':
     		del_aco();
     		break;
 
@@ -63,7 +64,7 @@
 			header("refresh:2;url = del_check.html");
 			exit();
 		}
-		$sql2 = "select acoid from connect where id = '".$person_id."' and secid = '".$account_id."'";
+		$sql2 = "select account_id from connect where identity = '".$person_id."' and id = '".$account_id."'";
 		$res2 = mysqli_query($con,$sql2);
 		$newArray2 = mysqli_fetch_array($res2,MYSQLI_ASSOC);
 		
@@ -82,7 +83,7 @@
 			$sql4 = "delete from account where account_id = '".$newArray2."'";
 			$res4 = mysqli_query($con,$sql4);
 		}
-		$sql6 = "select * from account_stock where account_id = '".$account_id."'";
+		$sql6 = "select * from account_stock where id = '".$account_id."'";
 		$res6 = mysqli_query($con,$sql6);
 		$newArray4 = mysqli_fetch_array($res6,MYSQLI_ASSOC);
 		
@@ -107,7 +108,7 @@
 			$sql7 = "delete from security_user where id = '".$account_id."'";
 			$res7 = mysqli_query($con,$sql7);
 			
-			$sql8 = "delete from connect where id = '".$person_id."'";
+			$sql8 = "delete from connect where identity = '".$person_id."'";
 			$res8 = mysqli_query($con,$sql8);
 			
 			if($res4&&$res5&&$res7&&$res8)

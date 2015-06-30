@@ -37,29 +37,28 @@
 		exit();
 	}
 	
-	else
-	{
+	
 		$sql="select * from security_user where identity = '".$person_id."'";
 		$res = mysqli_query($con,$sql);
 		$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
 		
-		$sql2 = "select acoid from connect where id = '".$person_id."'";
-		$res2 = mysqli_query($con,$sql);
+		$sql2 = "select account_id from connect where identity = '".$person_id."'";
+		$res2 = mysqli_query($con,$sql2);
 		$newArray2 = mysqli_fecth_array($res2,MYSQLI_ASSOC);
 		if($newArray2)
 		{
-			$sql3 = "select * from account where id ='".$newArray2."'";
-			$res3 =  mysqli_query($con,$sql);
+			$sql3 = "select * from account where account_id ='".$newArray2."'";
+			$res3 =  mysqli_query($con,$sql3);
 			$newArray3 = mysqli_fetch_array($res3,MYSQLI_ASSOC);
 		}
 		
 		$loss1 = 0;
 		$loss2 = 0;
-		if($res == True)
+		if($res)
 		{
-			if($res2 == True)
+			if($res2)
 			{
-				if($res3 == True)
+				if($res3)
 				{
 					if(!$newArray)
 					{
@@ -96,7 +95,7 @@
 						if($loss1)
 						{
 								$sqlsl="update security_user set flag = '0' where identity = '".$person_id."'";
-								$ressl=mysqli_query($con,$ressl);
+								$ressl=mysqli_query($con,$sqlsl);
 								if($ressl == True)
 								{
 									echo"<p>";
@@ -107,7 +106,7 @@
 						if($loss2)
 						{
 								$sqlal="update account set flag = '0' where id = '".$newArray2."'";
-								$resal=mysqli_query($con,$resal);
+								$resal=mysqli_query($con,$sqlsl);
 								if($resal == True)
 								{
 									echo"<p>";
@@ -122,7 +121,7 @@
 	echo"<p>";
 	echo"<a href='ad_function.html'>返回功能界面</a>";
 	echo"</p>";
-	}
+	
 	
 	
 ?>

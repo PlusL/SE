@@ -63,14 +63,14 @@
 	
 	else
 	{
-		$sql1="select top 1 * from account order by account_id desc";
+		$sql1="select * from account order by account_id desc limit 0,1";
 		$res1=mysqli_query($con,$sql1);
 		if($res == True)
 		{
 			$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
-			$accountid = intval($newArray['account_id']);
+			$accountid = (int)$newArray['account_id'];
 			$accountid = $accountid + 1;
-			$account_id = strval($accountid);
+			$account_id = (string)$accountid;
 		}
 		
 		$sql="update account set account_id = '".$account_id."' where identity='".$person_id."'";
@@ -80,17 +80,16 @@
 		$sql3="update account set signpasswd = '".$passwords."' where identity='".$person_id."'";
     	$res3=mysqli_query($con,$sql3);
 		
-		$sql4="update connect set acoid = '".$account_id."' where id='".$person_id."'";
+		$sql4="update connect set account_id = '".$account_id."' where identity='".$person_id."'";
 		$res4=mysqli_query($con,$sql2);
-    	if($res == True &&$res2 == True&&$res3==True&&$res4==True)
-    	{
+    	
+    	
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的资金账户账号为：</p>";
 			 echo $account_id;
 			 echo "</br>";
 			 echo "<a href='ad_function.html'><button class='btn-large'>返回</button></a>";
-    	}
-    	else
+    	if(0)
     	{
     		echo "<p><center>添加失败，请重试<center></p>";
         	header("refresh:1;url=capaccount.html");

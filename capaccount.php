@@ -62,23 +62,23 @@
 	
 	else
 	{
-		$sql1="select top 1 * from account order by account_id desc";
+		$sql1="select * from account order by account_id desc limit 0,1";
 		$res1=mysqli_query($con,$sql1);
 		if($res == True)
 		{
 			$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
-			$accountid = intval($newArray['account_id']);
+			$accountid = (int)$newArray['account_id'];
 			$accountid = $accountid + 1;
-			$account_id = strval($accountid);
+			$account_id = (string)$accountid;
 		}
 		
 		$sql="insert into account
 	     values ('".$account_id."','".$passwords."','".$password."','1','0','0','0','0','".$type."','".$person_id."')";
     	$res=mysqli_query($con,$sql);
 		
-		$sql2="update connect set acoid = '".$account_id."' where id='".$person_id."'";
+		$sql2="update connect set account_id = '".$account_id."' where identity='".$person_id."'";
 		$res2=mysqli_query($con,$sql2);
-    	if($res == True &&$res2 == True)
+    	if($res&&$res2)
     	{
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的资金账户账号为：</p>";
