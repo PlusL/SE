@@ -56,15 +56,17 @@
 	
 	else
 	{
-		$sql="select * from security_user order by id desc limit 0,1";
+		
+		$sql="select * from security_user order by id desc limit 1,1";
 		$res=mysqli_query($con,$sql);
 		if($res == True)
 		{
 			$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
 			$aid = (int)$newArray['id'];
 			$aid = $aid + 1;
-			$a_id =(string)$aid;
+			$a_id = (string)$aid;
 		}
+			
 		
 		$sql2="insert into security_user values('".$a_id."','".$person_id."','".$name."','1','0')";
 		$res2=mysqli_query($con,$sql2);
@@ -82,7 +84,7 @@
         {
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的证券账户账号为：</p>";
-			 echo $a_id;
+			 echo $code[0];
 			 echo "</br>";
 			 echo "<P>";
 			 echo "<a href='capaccount.html'><button class='btn-large'>办理资金账户</button></a>";

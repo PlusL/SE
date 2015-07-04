@@ -46,7 +46,7 @@
 	
 	else
 	{
-		$sql="select * from security_user order by id desc limit 0,1";
+		$sql="select * from security_user order by id desc limit 1,1";
 		$res=mysqli_query($con,$sql);
 		if($res == True)
 		{

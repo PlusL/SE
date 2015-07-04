@@ -19,10 +19,11 @@
 
 
 <body>
+
 <?php
 	include 'config.php';
 	$person_id = $_POST['personid'];
-	
+	$type = $_POST['type'];
 	if(!$person_id)
 	{
 		echo"<p><center>未检测到输入，请重试</center></p>";
@@ -37,75 +38,49 @@
 		exit();
 	}
 	
-	
+	if($type == 'a')
+	{
 		$sql="select * from security_user where identity = '".$person_id."'";
 		$res = mysqli_query($con,$sql);
 		$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
-		
-		$sql2 = "select account_id from connect where identity = '".$person_id."'";
-		$res2 = mysqli_query($con,$sql2);
-		$newArray2 = mysqli_fecth_array($res2,MYSQLI_ASSOC);
-		if($newArray2)
+		if(!$newArray)
 		{
-			$sql3 = "select * from account where account_id ='".$newArray2."'";
-			$res3 =  mysqli_query($con,$sql3);
-			$newArray3 = mysqli_fetch_array($res3,MYSQLI_ASSOC);
+			echo"<p><center>尚未办理任何账户</center></p>";
+			header("refresh:2;url=ad_function.html");
+			exit();
 		}
-		
-		$loss1 = 0;
-		$loss2 = 0;
-		if($res)
+		else
 		{
-			if($res2)
+			if(!$newArray['flag'])
 			{
-				if($res3)
+				echo"<p>证券账户已挂失</p>";
+			}
+			else
+			{
+				$sqlsl="update security_user set flag = '0' where identity = '".$person_id."'";
+				$ressl=mysqli_query($con,$sqlsl);
+				if($ressl == True)
 				{
-					if(!$newArray)
-					{
-						echo"<p><center>尚未办理任何账户</center></p>";
-						header("refresh:2;url=ad_function.html");
-						exit();
-					}
-					else
-					{
-						if(!$newArray['flag'])
-						{
-							echo"<p>证券账户已挂失</p>";
-						}
-						else
-						{
-							echo"<p>证券账户可用";
-							echo"   ";
-							echo"<a onclick='".$loss1."=1'>挂失证券账户</a>";
-							echo"</p>";
-						}
-						if(!$newArray3['flag'])
+					echo"<p>";
+					echo"挂失证券账户成功";
+					echo"</p>";
+				}
+			}
+		}
+	}
+	if($type == 'b')
+	{
+		$sql3 = "select * from account where indentity ='".$person_id."'";
+		$res3 =  mysqli_query($con,$sql3);
+		$newArray3 = mysqli_fetch_array($res3,MYSQLI_ASSOC);
+		
+		if(!$newArray3['flag'])
 						{
 							echo"<p>资金账户已挂失</p>";
 						}
 						else
 						{
-							echo"<p>资金账户可用";
-							echo"   ";
-							echo"<a onclick='".$loss2."=1'>挂失资金账户</a>";
-							echo"</p>";
-							
-						}
-						
-						if($loss1)
-						{
-								$sqlsl="update security_user set flag = '0' where identity = '".$person_id."'";
-								$ressl=mysqli_query($con,$sqlsl);
-								if($ressl == True)
-								{
-									echo"<p>";
-									echo"挂失证券账户成功";
-									echo"</p>";
-								}
-						}
-						if($loss2)
-						{
-								$sqlal="update account set flag = '0' where id = '".$newArray2."'";
+							$sqlal="update account set flag = '0' where id = '".$newArray2."'";
 								$resal=mysqli_query($con,$sqlsl);
 								if($resal == True)
 								{
@@ -113,17 +88,14 @@
 									echo"挂失资金账户成功";
 									echo"</p>";
 								}
+							
 						}
-					}
-				}
-			}
-		}
+						
+	}
+
 	echo"<p>";
 	echo"<a href='ad_function.html'>返回功能界面</a>";
 	echo"</p>";
-	
-	
-	
 ?>
 </body>
 </html>

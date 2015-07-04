@@ -63,7 +63,7 @@
 	
 	else
 	{
-		$sql1="select * from account order by account_id desc limit 0,1";
+		$sql1="select * from account order by account_id desc limit 5,1";
 		$res1=mysqli_query($con,$sql1);
 		if($res == True)
 		{
