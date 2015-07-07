@@ -69,7 +69,7 @@
 						if(!$newArray3)
 						{
 							echo"<p>";
-							echo"<a href='coporation.html'>办理资金账户</a>";
+							echo"<a href='capaccount.html'>办理资金账户</a>";
 							echo"</p>";
 							exit();
 						}

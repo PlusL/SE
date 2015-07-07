@@ -84,7 +84,7 @@
         {
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的证券账户账号为：</p>";
-			 echo $code[0];
+			 echo $a_id;
 			 echo "</br>";
 			 echo "<P>";
 			 echo "<a href='capaccount.html'><button class='btn-large'>办理资金账户</button></a>";

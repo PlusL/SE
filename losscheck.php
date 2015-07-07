@@ -51,7 +51,7 @@
 		}
 		else
 		{
-			if(!$newArray['flag'])
+			if($newArray['flag'] == 0)
 			{
 				echo"<p>证券账户已挂失</p>";
 			}
@@ -70,18 +70,18 @@
 	}
 	if($type == 'b')
 	{
-		$sql3 = "select * from account where indentity ='".$person_id."'";
+		$sql3 = "select * from account where identity ='".$person_id."'";
 		$res3 =  mysqli_query($con,$sql3);
 		$newArray3 = mysqli_fetch_array($res3,MYSQLI_ASSOC);
 		
-		if(!$newArray3['flag'])
+		if($newArray3['flag'] == 0)
 						{
 							echo"<p>资金账户已挂失</p>";
 						}
 						else
 						{
-							$sqlal="update account set flag = '0' where id = '".$newArray2."'";
-								$resal=mysqli_query($con,$sqlsl);
+							$sqlal="update account set flag = '0' where identity = '".$person_id."'";
+								$resal=mysqli_query($con,$sqlal);
 								if($resal == True)
 								{
 									echo"<p>";

@@ -66,20 +66,20 @@
 		$sql3 = "update connect set id = '".$a_id."' where identity = '".$person_id."'";
 		$res3 = mysqli_query($con,$sql3);
 		
-		$sql4 = "select id from security_user where identity = '".$person_id."' and id <> '".$a_id."'";
+		$sql4 = "select * from security_user where 'identity' = '".$person_id."' and 'id' <> '".$a_id."'";
 		$res4 = mysqli_query($con,$sql4);
 		$exid = mysqli_fetch_array($res4,MYSQLI_ASSOC);
 		
-		$sql5 = "update account_stock set id = '".$a_id."' where id = '".$exid."'";
+		$sql5 = "update account_stock set id = '".$a_id."' where id = '".$exid['id']."'";
 		$res5 = mysqli_query($con,$sql5);
 		
-		$sql6 = "delete from security_user where id = '".$exid."'";
+		$sql6 = "delete from security_user where id = '".$exid['id']."'";
 		$res6 = mysqli_query($con,$sql6);
 		
-		$sql7 = "delete from company_security_user where id = '".$exid."'";
+		$sql7 = "delete from company_security_user where id = '".$exid['id']."'";
 		$res7 = mysqli_query($con,$sql7);
 
-		if($res1&&$res2&&$res3&&$res4&&$res5&&$res6&&$res7)
+		if($res1&&$res2&&$res6&&$res7)
 		
     	{
     		 echo "<p><center>办理成功<center></p>";

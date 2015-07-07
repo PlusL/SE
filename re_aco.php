@@ -21,7 +21,7 @@
 <?php
 	include 'config.php';
 	$person_id = $_POST['personid'];
-	$type = $_POST['type'];
+	$type = $_POST['currency'];
 	$password = $_POST['password'];
 	$repassword = $_POST['repassword'];
 	$passwords = $_POST['passwords'];
@@ -63,11 +63,11 @@
 	
 	else
 	{
-		$sql1="select * from account order by account_id desc limit 5,1";
+		$sql1="select * from account order by account_id desc limit 4,1";
 		$res1=mysqli_query($con,$sql1);
-		if($res == True)
+		if($res1  == True)
 		{
-			$newArray = mysqli_fetch_array($res, MYSQLI_ASSOC);
+			$newArray = mysqli_fetch_array($res1, MYSQLI_ASSOC);
 			$accountid = (int)$newArray['account_id'];
 			$accountid = $accountid + 1;
 			$account_id = (string)$accountid;

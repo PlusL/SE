@@ -67,7 +67,7 @@ function re_sec()
 		}
 		else
 		{
-			if($newArray['flag'])
+			if($newArray['flag'] == 1)
 			{
 				echo"<p><center>证券账户仍活跃</center></p>";
 				header("refresh:2;url=ad_function.html");
@@ -77,7 +77,7 @@ function re_sec()
 			{
 				if($method == '2')
 				{
-					$sql1 = "update security_user set flag = 1 where identity = '".$person_id."'";
+					$sql1 = "update security_user set flag = '1' where identity = '".$person_id."'";
 					$res1 = mysqli_query($con,$sql1);
 					
 					if($res1)
@@ -96,16 +96,16 @@ function re_sec()
 						exit();
 					}
 				}
-				if($method == '1')
+				else
 				{
-					if($newArray['type']==0)
+					if($newArray['type'] == 0)
 					{
-						header("url=re_indiv.html");
+						header("refresh:1;url=re_indiv.html");
 						exit();
 					}
-					if($newArray['type']==1)
+					else
 					{
-						header("url=re_corpo.html");
+						header("refresh:1;url=re_corpo.html");
 						exit();
 					}
 					
@@ -133,7 +133,7 @@ function re_aco()
 		}
 		else
 		{
-			if($newArray['flag'])
+			if($newArray['flag'] == 1)
 			{
 				echo"<p><center>资金账户仍活跃</center></p>";
 				header("refresh:2;url=ad_function.html");
@@ -143,7 +143,7 @@ function re_aco()
 			{
 				if($method == '2')
 				{
-					$sql1 = "update account set flag = 1 where identity = '".$person_id."'";
+					$sql1 = "update account set flag = '1' where identity = '".$person_id."'";
 					$res1 = mysqli_query($con,$sql1);
 					
 					if($res1)
@@ -164,7 +164,7 @@ function re_aco()
 				}
 				if($method == '1')
 				{
-					header("re_aco.html");
+					header("refresh:1;url=re_aco.html");
 					exit();
 					
 					

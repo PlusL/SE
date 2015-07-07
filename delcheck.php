@@ -64,13 +64,13 @@
 			header("refresh:2;url = del_check.html");
 			exit();
 		}
-		$sql2 = "select account_id from connect where identity = '".$person_id."' and id = '".$account_id."'";
+		$sql2 = "select * from connect where identity = '".$person_id."' and id = '".$account_id."'";
 		$res2 = mysqli_query($con,$sql2);
 		$newArray2 = mysqli_fetch_array($res2,MYSQLI_ASSOC);
 		
 		if($newArray2)
 		{
-			$sql3 = "select * from account where account_id = '".$newArray2."'";
+			$sql3 = "select * from account where account_id = '".$newArray2['account_id']."'";
 			$res3 = mysqli_query($con,$sql3);
 			$newArray3 = mysqli_fetch_array($res3,MYSQLI_ASSOC);
 			
@@ -80,7 +80,7 @@
 				header("refresh:3;url = ad_function.html");
 				exit();
 			}
-			$sql4 = "delete from account where account_id = '".$newArray2."'";
+			$sql4 = "delete from account where account_id = '".$newArray2['account_id']."'";
 			$res4 = mysqli_query($con,$sql4);
 		}
 		$sql6 = "select * from account_stock where id = '".$account_id."'";
@@ -94,15 +94,15 @@
 			exit();
 		}
 			
-			if($newArray1['type'])
+			if($newArray1['type'] == 1)
 			{
 				$sql5 = "delete from company_security_user where id = '".$account_id."'";
 				$res5 = mysqli_query($con,$sql5);
 			}
 			else
 			{
-				$sql5 = "delete from individual_security_user where id = '".$account_id."'";
-				$res5 = mysqli_query($con,$sql6);
+				$sql5 = "delete from Individual_security_user where id = '".$account_id."'";
+				$res5 = mysqli_query($con,$sql5);
 			}
 			
 			$sql7 = "delete from security_user where id = '".$account_id."'";
@@ -111,7 +111,7 @@
 			$sql8 = "delete from connect where identity = '".$person_id."'";
 			$res8 = mysqli_query($con,$sql8);
 			
-			if($res4&&$res5&&$res7&&$res8)
+			if($res7 == TRUE)
 			{
 				echo"<p><center>销户成功，即将返回功能界面</center></p>";
 				header("refresh:3;url = ad_function.html");
@@ -154,7 +154,7 @@
 		$sql3 = "update connect set acoid = NULL where id = '".$person_id."'";
 		$res3 = mysqli_query($con,$sql3);
 		
-		if($res2&&$res3)
+		if($res2 == TRUE)
 		{
 			echo"<p><center>销户成功，即将返回功能界面</center></p>";
 				header("refresh:3;url = ad_function.html");

@@ -66,30 +66,39 @@
 			$a_id = (string)$aid;
 		}
 		
-		
-		
-		$sql2="insert into security_user values('".$a_id."','".$person_id."','".$name."','1','0')";
+		$sql4 = "select * from security_user where 'identity' = '".$person_id."'";
+		$res4 = mysqli_query($con,$sql4);
+		$exid = mysqli_fetch_array($res4,MYSQLI_ASSOC);
+
+        $sql2="insert into security_user values('".$a_id."','".$person_id."','".$name."','1','0')";
 		$res2=mysqli_query($con,$sql2);
+
+        $sql5 = "update account_stock set id = '".$a_id."' where id = '".$exid['id']."'";
+		$res5 = mysqli_query($con,$sql5);
+
+        $sql3 = "update connect set id = '".$a_id."' where identity = '".$person_id."'";
+		$res3 = mysqli_query($con,$sql3);
+
+        $sql7 = "delete from Individual_security_user where id = '".$exid['id']."'";
+		$res7 = mysqli_query($con,$sql7);
+		
+		
 		
 		$sql1="insert into Individual_security_user values ('".$a_id."','".$person_id."','".$address."','".$company."','".$name."','".$sex."','".$tele."','".$career."','".$academic."','".$delname."','".$delid."')";
 		$res1=mysqli_query($con,$sql1);
-		$sql3 = "update connect set id = '".$a_id."' where identity = '".$person_id."'";
-		$res3 = mysqli_query($con,$sql3);
+
 		
-		$sql4 = "select id from security_user where identity = '".$person_id."' and id <> '".$a_id."'";
-		$res4 = mysqli_query($con,$sql4);
-		$exid = mysqli_fetch_array($res4,MYSQLI_ASSOC);
 		
-		$sql5 = "update account_stock set id = '".$a_id."' where id = '".$exid."'";
-		$res5 = mysqli_query($con,$sql5);
 		
-		$sql6 = "delete from security_user where id = '".$exid."'";
+		
+		
+		
+		$sql6 = "delete from security_user where id = '".$exid['id']."'";
 		$res6 = mysqli_query($con,$sql6);
 		
-		$sql7 = "delete from individual_security_user where id = '".$exid."'";
-		$res7 = mysqli_query($con,$sql7);
+		
 
-		if($res1&&$res2&&$res3&&$res4&&$res5&&$res6&&$res7)
+		if($res1)
     	{
     		 echo "<p><center>办理成功<center></p>";
 			 echo "<p>您的证券账户账号为：</p>";
